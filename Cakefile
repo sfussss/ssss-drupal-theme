@@ -13,7 +13,7 @@ spawnProcess = (name, args) ->
 watchLessFiles = ->
 	args = [
 		'-e'
-		"watch( 'less/.*\\.less' ) { system 'make bootstrap' }"
+		"watch( './src/less/.*\\.less' ) { system 'make build-bootstrap-styl' }"
 	]
 
 	spawnProcess = spawnProcess 'watchr', args
