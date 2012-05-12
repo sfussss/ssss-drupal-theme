@@ -34,3 +34,8 @@ nbproject
 .CVS
 .idea
 node_modules
+
+# Build folders to ignore
+bootstrap/
+bin/
+# TODO: Ignore the docs folder.

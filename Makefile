@@ -70,25 +70,26 @@ bootstrap:
 	cat bootstrap/js/copyright.js bootstrap/js/bootstrap.min.tmp.js > bootstrap/js/bootstrap.min.js
 	rm bootstrap/js/copyright.js bootstrap/js/bootstrap.min.tmp.js
 
-#
-# MAKE FOR GH-PAGES 4 FAT & MDO ONLY (O_O  )
-#
+build-js:
+	mkdir -p bin/bootstrap/js
+	cat js/bootstrap-transition.js js/bootstrap-alert.js js/bootstrap-button.js js/bootstrap-carousel.js js/bootstrap-collapse.js js/bootstrap-dropdown.js js/bootstrap-modal.js js/bootstrap-tooltip.js js/bootstrap-popover.js js/bootstrap-scrollspy.js js/bootstrap-tab.js js/bootstrap-typeahead.js > bin/bootstrap/js/bootstrap.js
 
-gh-pages: bootstrap docs
-	rm -f docs/assets/bootstrap.zip
-	zip -r docs/assets/bootstrap.zip bootstrap
-	rm -r bootstrap
-	rm -f ../bootstrap-gh-pages/assets/bootstrap.zip
-	node docs/build production
-	cp -r docs/* ../bootstrap-gh-pages
+build-js-compressed:
+	make build-js
+	cp bin/bootstrap/js/bootstrap.js bin/bootstrap/js/bootstrap.tmp.js
+	rm bin/bootstrap/js/bootstrap.js
+	uglifyjs -nc bin/bootstrap/js/bootstrap.tmp.js > bin/bootstrap/js/bootstrap.js
 
-#
-# WATCH LESS FILES
-#
+copy-images:
+	mkdir -p bin/bootstrap/img
+	cp img/* bootstrap/img/
 
-watch:
-	echo "Watching less files..."; \
-	watchr -e "watch('less/.*\.less') { system 'make' }"
+build-css:
+	mkdir -p bin/bootstrap/css
+	recess --compile ${BOOTSTRAP_LESS} > bin/bootstrap/css/bootstrap.css
+	recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > bin/bootstrap/css/bootstrap-responsive.css
 
-
-.PHONY: docs watch gh-pages
+build-css-compressed:
+	mkdir -p bin/bootstrap/css
+	recess --compress ${BOOTSTRAP_LESS} > bin/bootstrap/css/bootstrap.css
+	recess --compress ${BOOTSTRAP_LESS} > bin/bootstrap/css/bootstrap-responsive.css
