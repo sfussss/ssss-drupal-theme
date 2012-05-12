@@ -1,12 +1,6 @@
 #!/bin/bash
 
 echo ""
-echo "Installing watchr."
-echo ""
-
-sudo gem install watchr
-
-echo ""
 echo "Installing CoffeeScript"
 echo ""
 

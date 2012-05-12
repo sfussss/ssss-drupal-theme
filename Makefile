@@ -37,9 +37,10 @@ copy-images:
 	cp img/* bootstrap/img/
 
 build-bootstrap-styl:
-	mkdir -p ${BOOTSTRAP_STYL}
-	recess --compile ${BOOTSTRAP_LESS} > ${BOOTSTRAP_STYL}/bootstrap.styl
-	recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > ${BOOTSTRAP_STYL}/bootstrap-responsive.styl
+	@mkdir -p ${BOOTSTRAP_STYL}
+	@recess --compile ${BOOTSTRAP_LESS} > ${BOOTSTRAP_STYL}/bootstrap.styl
+	@recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > ${BOOTSTRAP_STYL}/bootstrap-responsive.styl
+	@echo "Bootstrap styles built."
 
 clean:
 	rm -rf ${TO_STYL}

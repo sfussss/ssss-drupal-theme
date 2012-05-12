@@ -11,6 +11,9 @@
     }
   ]
   , "license": "Do whatever you want"
+  , "dependencies": {
+    "watch": "0.5.x"
+  }
   , "devDependencies": {
     "connect": "2.1.3"
   }
