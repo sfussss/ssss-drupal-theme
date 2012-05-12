@@ -1,42 +1,13 @@
-BOOTSTRAP = ./docs/assets/css/bootstrap.css
 BOOTSTRAP_LESS = ./less/bootstrap.less
-BOOTSTRAP_RESPONSIVE = ./docs/assets/css/bootstrap-responsive.css
 BOOTSTRAP_RESPONSIVE_LESS = ./less/responsive.less
-DATE=$(shell date +%I:%M%p)
-CHECK=\033[32m✔\033[39m
-HR=\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#
 
+TO_STYL=./src/styl/bin
+BOOTSTRAP_STYL=${TO_STYL}/bootstrap
 
-#
-# BUILD DOCS
-#
+JS_BOOTSTRAP=./src/js/bootstrap
 
-build:
-	@echo "\n${HR}"
-	@echo "Building Bootstrap..."
-	@echo "${HR}\n"
-	@jshint js/*.js --config js/.jshintrc
-	@jshint js/tests/unit/*.js --config js/.jshintrc
-	@echo "Running JSHint on javascript...             ${CHECK} Done"
-	@recess --compile ${BOOTSTRAP_LESS} > ${BOOTSTRAP}
-	@recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > ${BOOTSTRAP_RESPONSIVE}
-	@echo "Compiling LESS with Recess...               ${CHECK} Done"
-	@node docs/build
-	@cp img/* docs/assets/img/
-	@cp js/*.js docs/assets/js/
-	@cp js/tests/vendor/jquery.js docs/assets/js/
-	@echo "Compiling documentation...                  ${CHECK} Done"
-	@cat js/bootstrap-transition.js js/bootstrap-alert.js js/bootstrap-button.js js/bootstrap-carousel.js js/bootstrap-collapse.js js/bootstrap-dropdown.js js/bootstrap-modal.js js/bootstrap-tooltip.js js/bootstrap-popover.js js/bootstrap-scrollspy.js js/bootstrap-tab.js js/bootstrap-typeahead.js > docs/assets/js/bootstrap.js
-	@uglifyjs -nc docs/assets/js/bootstrap.js > docs/assets/js/bootstrap.min.tmp.js
-	@echo "/**\n* Bootstrap.js by @fat & @mdo\n* Copyright 2012 Twitter, Inc.\n* http://www.apache.org/licenses/LICENSE-2.0.txt\n*/" > docs/assets/js/copyright.js
-	@cat docs/assets/js/copyright.js docs/assets/js/bootstrap.min.tmp.js > docs/assets/js/bootstrap.min.js
-	@rm docs/assets/js/copyright.js docs/assets/js/bootstrap.min.tmp.js
-	@echo "Compiling and minifying javascript...       ${CHECK} Done"
-	@echo "\n${HR}"
-	@echo "Bootstrap successfully built at ${DATE}."
-	@echo "${HR}\n"
-	@echo "Thanks for using Bootstrap,"
-	@echo "<3 @mdo and @fat\n"
+JS_BIN=./src/js/bin
+JS_BOOTSTRAP_CONCAT=${JS_BIN}/bootstrap
 
 #
 # RUN JSHINT & QUNIT TESTS IN PHANTOMJS
@@ -50,46 +21,29 @@ test:
 	kill -9 `cat js/tests/pid.txt`
 	rm js/tests/pid.txt
 
-#
-# BUILD SIMPLE BOOTSTRAP DIRECTORY
-# recess & uglifyjs are required
-#
-
-bootstrap:
-	mkdir -p bootstrap/img
-	mkdir -p bootstrap/css
-	mkdir -p bootstrap/js
-	cp img/* bootstrap/img/
-	recess --compile ${BOOTSTRAP_LESS} > bootstrap/css/bootstrap.css
-	recess --compress ${BOOTSTRAP_LESS} > bootstrap/css/bootstrap.min.css
-	recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > bootstrap/css/bootstrap-responsive.css
-	recess --compress ${BOOTSTRAP_RESPONSIVE_LESS} > bootstrap/css/bootstrap-responsive.min.css
-	cat js/bootstrap-transition.js js/bootstrap-alert.js js/bootstrap-button.js js/bootstrap-carousel.js js/bootstrap-collapse.js js/bootstrap-dropdown.js js/bootstrap-modal.js js/bootstrap-tooltip.js js/bootstrap-popover.js js/bootstrap-scrollspy.js js/bootstrap-tab.js js/bootstrap-typeahead.js > bootstrap/js/bootstrap.js
-	uglifyjs -nc bootstrap/js/bootstrap.js > bootstrap/js/bootstrap.min.tmp.js
-	echo "/*!\n* Bootstrap.js by @fat & @mdo\n* Copyright 2012 Twitter, Inc.\n* http://www.apache.org/licenses/LICENSE-2.0.txt\n*/" > bootstrap/js/copyright.js
-	cat bootstrap/js/copyright.js bootstrap/js/bootstrap.min.tmp.js > bootstrap/js/bootstrap.min.js
-	rm bootstrap/js/copyright.js bootstrap/js/bootstrap.min.tmp.js
+#bootstrap:
+	#mkdir -p bootstrap/img
+	#cp img/* bootstrap/img/
+	#cat js/bootstrap-transition.js js/bootstrap-alert.js js/bootstrap-button.js js/bootstrap-carousel.js js/bootstrap-collapse.js js/bootstrap-dropdown.js js/bootstrap-modal.js js/bootstrap-tooltip.js js/bootstrap-popover.js js/bootstrap-scrollspy.js js/bootstrap-tab.js js/bootstrap-typeahead.js > bootstrap/js/bootstrap.js
+	#uglifyjs -nc bootstrap/js/bootstrap.js > bootstrap/js/bootstrap.min.tmp.js
+	#echo "/*!\n* Bootstrap.js by @fat & @mdo\n* Copyright 2012 Twitter, Inc.\n* http://www.apache.org/licenses/LICENSE-2.0.txt\n*/" > bootstrap/js/copyright.js
+	#cat bootstrap/js/copyright.js bootstrap/js/bootstrap.min.tmp.js > bootstrap/js/bootstrap.min.js
+	#rm bootstrap/js/copyright.js bootstrap/js/bootstrap.min.tmp.js
 
 build-js:
-	mkdir -p bin/bootstrap/js
-	cat js/bootstrap-transition.js js/bootstrap-alert.js js/bootstrap-button.js js/bootstrap-carousel.js js/bootstrap-collapse.js js/bootstrap-dropdown.js js/bootstrap-modal.js js/bootstrap-tooltip.js js/bootstrap-popover.js js/bootstrap-scrollspy.js js/bootstrap-tab.js js/bootstrap-typeahead.js > bin/bootstrap/js/bootstrap.js
-
-build-js-compressed:
-	make build-js
-	cp bin/bootstrap/js/bootstrap.js bin/bootstrap/js/bootstrap.tmp.js
-	rm bin/bootstrap/js/bootstrap.js
-	uglifyjs -nc bin/bootstrap/js/bootstrap.tmp.js > bin/bootstrap/js/bootstrap.js
+	mkdir -p ${JS_BOOTSTRAP_CONCAT}
+	cat ${JS_BOOTSTRAP}/bootstrap-transition.js ${JS_BOOTSTRAP}/bootstrap-alert.js ${JS_BOOTSTRAP}/bootstrap-button.js ${JS_BOOTSTRAP}/bootstrap-carousel.js ${JS_BOOTSTRAP}/bootstrap-collapse.js ${JS_BOOTSTRAP}/bootstrap-dropdown.js ${JS_BOOTSTRAP}/bootstrap-modal.js ${JS_BOOTSTRAP}/bootstrap-tooltip.js ${JS_BOOTSTRAP}/bootstrap-popover.js ${JS_BOOTSTRAP}/bootstrap-scrollspy.js ${JS_BOOTSTRAP}/bootstrap-tab.js ${JS_BOOTSTRAP}/bootstrap-typeahead.js > ${JS_BOOTSTRAP_CONCAT}/bootstrap.js
 
 copy-images:
 	mkdir -p bin/bootstrap/img
 	cp img/* bootstrap/img/
 
-build-css:
-	mkdir -p bin/bootstrap/css
-	recess --compile ${BOOTSTRAP_LESS} > bin/bootstrap/css/bootstrap.css
-	recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > bin/bootstrap/css/bootstrap-responsive.css
+build-bootstrap:
+	mkdir -p ${BOOTSTRAP_STYL}
+	recess --compile ${BOOTSTRAP_LESS} > ${BOOTSTRAP_STYL}/bootstrap.styl
+	recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > ${BOOTSTRAP_STYL}/bootstrap-responsive.styl
 
-build-css-compressed:
-	mkdir -p bin/bootstrap/css
-	recess --compress ${BOOTSTRAP_LESS} > bin/bootstrap/css/bootstrap.css
-	recess --compress ${BOOTSTRAP_LESS} > bin/bootstrap/css/bootstrap-responsive.css
+clean:
+	rm -rf ${TO_STYL}
+	rm -rf bin
+	rm -rf node_modules

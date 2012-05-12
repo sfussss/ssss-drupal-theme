@@ -5,3 +5,39 @@ echo "Installing watchr."
 echo ""
 
 sudo gem install watchr
+
+echo ""
+echo "Installing CoffeeScript"
+echo ""
+
+sudo npm install -g coffee-script
+
+echo ""
+echo "Installing Stylus"
+echo ""
+
+sudo npm install -g stylus
+
+echo ""
+echo "Installing jshint."
+echo ""
+
+sudo npm install -g jshint
+
+echo ""
+echo "Installing uglify-js."
+echo ""
+
+sudo npm install -g uglify-js
+
+echo ""
+echo "Installing recess."
+echo ""
+
+sudo npm install -g recess
+
+echo ""
+echo "Installing dependencies."
+echo ""
+
+npm install
