@@ -45,8 +45,9 @@ build-coffee:
 	@coffee --compile --output ${COFFEE_BUILD}/ ${COFFEE_SRC}/
 
 copy-images:
-	mkdir -p bin/img
-	cp img/* bin/img/
+	@mkdir -p bin/img
+	@cp src/img/* bin/img/
+	@echo "The images have been copied."
 
 build-bootstrap-sass:
 	@mkdir -p ${BOOTSTRAP_SASS}

@@ -15,10 +15,11 @@ spawnProcess = (name, args) ->
 	process.stderr.on 'data', outputStdout
 	return process
 
-spawnLess = -> spawnProcess 'make', [ 'build-bootstrap-sass' ]
-spawnSass = -> spawnProcess 'make', [ 'compile-css' ]
-spawnCat  = -> spawnProcess 'make', [ 'build-bootstrap-js' ]
-spawnCp   = -> spawnProcess 'make', [ 'copy-js' ]
+spawnLess  = -> spawnProcess 'make', [ 'build-bootstrap-sass' ]
+spawnSass  = -> spawnProcess 'make', [ 'compile-css' ]
+spawnCat   = -> spawnProcess 'make', [ 'build-bootstrap-js' ]
+spawnCpJs  = -> spawnProcess 'make', [ 'copy-js' ]
+spawnCpImg = -> spawnProcess 'make', [ 'copy-images' ]
 
 compileCss = (cb) ->
 	async.waterfall [
@@ -67,13 +68,18 @@ watchBootstrapJs = ->
 	watchFiles './src/js/bootstrap', spawnCat
 
 watchJs = ->
-	watchFiles './src/js/ssss', spawnCp
+	watchFiles './src/js/ssss', spawnCpJs
+
+watchImg = ->
+	watchFiles './src/img', spawnCpImg
 
 compileWatchCss = ->
+	spawnCpImg()
 	spawnCat()
-	spawnCp()
+	spawnCpJs()
 	watchBootstrapJs()
 	watchJs()
+	watchImg()
 	compileCss ->
 		watchLessFiles()
 		watchSassFiles()
