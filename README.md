@@ -2,7 +2,7 @@ This is a Drupal Theme for the Software Systems Student Society.
 
 It uses Twitter's Bootstrap to help out with the design.
 
-The styling in this theme is written in LESS, and Stylus. The LESS part came with Bootstrap. The Stylus ones were added for additional styling.
+The styling in this theme is written in LESS, and SASS/SCSS. The LESS part came with Bootstrap. The SASS/SCSS ones were added for additional styling.
 
 ## Developing
 
