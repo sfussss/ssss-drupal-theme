@@ -37,6 +37,5 @@ node_modules
 .sass-cache
 
 # Build folders to ignore
-bootstrap/
-bin/
-# TODO: Ignore the docs folder.
+bootstrap
+bin
