@@ -77,8 +77,8 @@ watchCoffee = ->
 	coffeeArgs = [
 		'--watch'
 		'--output'
-		'./src/coffee/'
 		'./bin/js/coffee_build/'
+		'./src/coffee/'
 	]
 	spawnProcess 'coffee', coffeeArgs
 
