@@ -3,6 +3,8 @@ watch         = require 'watch'
 path          = require 'path'
 async         = require 'async'
 
+# TODO: Refactor and rename a bunch of these.
+
 outputStdout = (data) ->
 	console.log data.toString('utf8').trim()
 
@@ -16,6 +18,7 @@ spawnProcess = (name, args) ->
 spawnLess = -> spawnProcess 'make', [ 'build-bootstrap-sass' ]
 spawnSass = -> spawnProcess 'make', [ 'compile-css' ]
 spawnCat  = -> spawnProcess 'make', [ 'build-bootstrap-js' ]
+spawnCp   = -> spawnProcess 'make', [ 'copy-js' ]
 
 compileCss = (cb) ->
 	async.waterfall [
@@ -63,9 +66,14 @@ watchSassFiles = ->
 watchBootstrapJs = ->
 	watchFiles './src/js/bootstrap', spawnCat
 
+watchJs = ->
+	watchFiles './src/js/ssss', spawnCp
+
 compileWatchCss = ->
 	spawnCat()
+	spawnCp()
 	watchBootstrapJs()
+	watchJs()
 	compileCss ->
 		watchLessFiles()
 		watchSassFiles()
