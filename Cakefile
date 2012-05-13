@@ -73,6 +73,15 @@ watchJs = ->
 watchImg = ->
 	watchFiles './src/img', spawnCpImg
 
+watchCoffee = ->
+	coffeeArgs = [
+		'--watch'
+		'--output'
+		'./src/coffee/'
+		'./bin/js/coffee_build/'
+	]
+	spawnProcess 'coffee', coffeeArgs
+
 compileWatchCss = ->
 	spawnCpImg()
 	spawnCat()
@@ -80,6 +89,7 @@ compileWatchCss = ->
 	watchBootstrapJs()
 	watchJs()
 	watchImg()
+	watchCoffee()
 	compileCss ->
 		watchLessFiles()
 		watchSassFiles()
