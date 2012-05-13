@@ -4,8 +4,8 @@ BIN=./bin
 BOOTSTRAP_LESS=${SRC}/less/bootstrap.less
 BOOTSTRAP_RESPONSIVE_LESS=${SRC}/less/responsive.less
 
-TO_STYL=${SRC}/styl/bin
-BOOTSTRAP_STYL=${TO_STYL}/bootstrap
+TO_SASS=${SRC}/sass/bin
+BOOTSTRAP_SASS=${TO_SASS}/bootstrap
 
 JS_SRC=${SRC}/js
 
@@ -36,15 +36,20 @@ copy-images:
 	mkdir -p bin/bootstrap/img
 	cp img/* bootstrap/img/
 
-build-bootstrap-styl:
-	@mkdir -p ${BOOTSTRAP_STYL}
-	@recess --compile ${BOOTSTRAP_LESS} > ${BOOTSTRAP_STYL}/bootstrap.styl
-	@recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > ${BOOTSTRAP_STYL}/bootstrap-responsive.styl
+build-bootstrap-sass:
+	@mkdir -p ${BOOTSTRAP_SASS}
+	@recess --compile ${BOOTSTRAP_LESS} > ${BOOTSTRAP_SASS}/_bootstrap.scss
+	@recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > ${BOOTSTRAP_SASS}/_bootstrap-responsive.scss
 	@echo "Bootstrap styles built."
 
+compile-css:
+	@sass -f --update src/sass:bin/css
+	@echo "Sass files have compiled."
+
 clean:
-	rm -rf ${TO_STYL}
+	rm -rf ${TO_SASS}
 	rm -rf bin
+	rm -rf .sass-cache
 
 clean-all:
 	make clean

@@ -1,16 +1,16 @@
 #!/bin/bash
 
 echo ""
+echo "Installing SASS"
+echo ""
+
+sudo gem install sass
+
+echo ""
 echo "Installing CoffeeScript"
 echo ""
 
 sudo npm install -g coffee-script
-
-echo ""
-echo "Installing Stylus"
-echo ""
-
-sudo npm install -g stylus
 
 echo ""
 echo "Installing jshint."

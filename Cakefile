@@ -1,6 +1,7 @@
 child_process = require 'child_process'
-watch = require 'watch'
-path = require 'path'
+watch         = require 'watch'
+path          = require 'path'
+async         = require 'async'
 
 outputStdout = (data) ->
 	console.log data.toString('utf8').trim()
@@ -12,20 +13,56 @@ spawnProcess = (name, args) ->
 	process.stderr.on 'data', outputStdout
 	return process
 
-watchLessFiles = ->
-	spawnMake = -> spawnProcess 'make', [ 'build-bootstrap-styl' ]
+spawnLess = -> spawnProcess 'make', [ 'build-bootstrap-sass' ]
+spawnSass = -> spawnProcess 'make', [ 'compile-css' ]
 
-	watch.createMonitor './src/less/', (monitor) ->
+compileCss = (cb) ->
+	async.waterfall [
+		(callback) ->
+			less = spawnLess()
+
+			less.on 'exit', (code, signal) ->
+				callback null, code, signal
+
+		(code, signal, callback) ->
+			if not code?
+				throw new Error "Bootstrap failed to build."
+
+			sass = spawnSass()
+
+			sass.on 'exit', (code, signal) ->
+				callback null, code, signal
+
+		(code, signal, callback) ->
+			if not code?
+				throw new Error "None of the styles managed to be built."
+
+			if typeof cb is 'function'
+				cb()
+	]
+
+watchFiles = (dir, cb) ->
+	watch.createMonitor dir, (monitor) ->
 		monitor.on 'created', (f, stat) ->
-			spawnMake()
+			cb()
 
 		monitor.on 'changed', (f, curr, prev) ->
 			if curr.mtime.getTime() isnt prev.mtime.getTime()
-				spawnMake()
+				cb()
 
 		monitor.on 'removed', (f, stat) ->
-			spawnMake()
+			cb()
+
+watchLessFiles = ->
+	watchFiles './src/less', spawnLess
+
+watchSassFiles = ->
+	watchFiles './src/sass', spawnSass
+
+compileWatchCss = ->
+	compileCss ->
+		watchLessFiles()
+		watchSassFiles()
 
 task 'watch', 'Watch for changes in files.', ->
-	console.log "Watching LESS files for changes."
-	watchLessFiles()
+	compileWatchCss()
