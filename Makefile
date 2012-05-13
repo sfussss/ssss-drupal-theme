@@ -8,11 +8,14 @@ TO_SASS=${SRC}/sass/bin
 BOOTSTRAP_SASS=${TO_SASS}/bootstrap
 
 JS_SRC=${SRC}/js
+COFFEE_SRC=${SRC}/coffee
 
 JS_BOOTSTRAP=${JS_SRC}/bootstrap
 
 JS_BIN=${BIN}/js
 JS_BOOTSTRAP_CONCAT=${JS_BIN}/bootstrap
+
+COFFEE_BUILD=${JS_BIN}/coffee_build
 
 test:
 	jshint js/*.js --config js/.jshintrc
@@ -37,9 +40,13 @@ build-js:
 	@make copy-js
 	@echo "JavaScript is built."
 
+build-coffee:
+	@mkdir -p ${COFFEE_BUILD}
+	@coffee --compile --output ${COFFEE_BUILD}/ ${COFFEE_SRC}/
+
 copy-images:
-	mkdir -p bin/bootstrap/img
-	cp img/* bootstrap/img/
+	mkdir -p bin/img
+	cp img/* bin/img/
 
 build-bootstrap-sass:
 	@mkdir -p ${BOOTSTRAP_SASS}
