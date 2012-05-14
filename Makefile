@@ -100,10 +100,13 @@ build-project:
 	@make build-css
 	@make build-js
 
-distribute:
+build-project-compressed:
 	@make build-project
 	@make compress-js
 	@make compress-css
+
+distribute:
+	@make build-project-compressed
 
 	@rm -rf dist
 
