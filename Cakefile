@@ -16,7 +16,7 @@ spawnProcess = (name, args) ->
 	return process
 
 spawnLess  = -> spawnProcess 'make', [ 'build-bootstrap-sass' ]
-spawnSass  = -> spawnProcess 'make', [ 'compile-css' ]
+spawnSass  = -> spawnProcess 'make', [ 'compile-sass' ]
 spawnCat   = -> spawnProcess 'make', [ 'build-bootstrap-js' ]
 spawnCpJs  = -> spawnProcess 'make', [ 'copy-js' ]
 spawnCpImg = -> spawnProcess 'make', [ 'copy-images' ]

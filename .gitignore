@@ -35,6 +35,7 @@ nbproject
 .idea
 node_modules
 .sass-cache
+bin.tmp
 
 # Build folders to ignore
 bootstrap

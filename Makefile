@@ -36,14 +36,17 @@ copy-js:
 	@cp -rf ${JS_SRC}/ssss ${JS_BIN}
 	@echo "The JavaScript code has been copied."
 
-build-js:
-	@make build-bootstrap-js
-	@make copy-js
-	@echo "JavaScript is built."
-
 build-coffee:
 	@mkdir -p ${COFFEE_BUILD}
 	@coffee --compile --output ${COFFEE_BUILD}/ ${COFFEE_SRC}/
+
+# Use this to build the entire project.
+
+build-js:
+	@make build-bootstrap-js
+	@make copy-js
+	@make build-coffee
+	@echo "JavaScript is built."
 
 copy-images:
 	@mkdir -p bin/img
@@ -56,14 +59,39 @@ build-bootstrap-sass:
 	@recess --compile ${BOOTSTRAP_RESPONSIVE_LESS} > ${BOOTSTRAP_SASS}/_bootstrap-responsive.scss
 	@echo "Bootstrap styles built."
 
-compile-css:
+compile-sass:
 	@sass -f --update src/sass:bin/css
 	@echo "Sass files have compiled."
+
+build-css:
+	@make build-bootstrap-sass
+	@make compile-sass
+	@echo "CSS has been compiled."
+
+compress-js:
+	@# Better safe than sorry. Build the JavaScript code...
+	@make build-js
+
+	@# ...THEN compress it.
+	@node r.js -o app.build.js #name=bin/js/coffee_build/script out=bin.tmp/script.js baseUrl=.
+
+	@rm -rf bin/js
+	@mkdir -p bin/js/coffee_build
+	@cp bin.tmp/* bin/js/coffee_build
+	@#@rm -rf bin.tmp
+	@mkdir -p bin/js/ssss/lib/require
+	@cp src/js/ssss/lib/require/* bin/js/ssss/lib/require
+
+build-project:
+	@make copy-images
+	@make build-css
+	@make build-js
 
 clean:
 	rm -rf ${TO_SASS}
 	rm -rf bin
 	rm -rf .sass-cache
+	rm -rf bin.tmp
 
 clean-all:
 	make clean

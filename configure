@@ -31,6 +31,12 @@ echo ""
 sudo npm install -g recess
 
 echo ""
+echo "Installing requirejs."
+echo ""
+
+sudo npm install -g requirejs
+
+echo ""
 echo "Installing dependencies."
 echo ""
 
