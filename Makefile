@@ -32,7 +32,8 @@ build-bootstrap-js:
 	@echo "Bootstrap is now compiled."
 
 copy-js:
-	@cp -rf ${JS_SRC}/ssss ${JS_BIN}/ssss
+	@mkdir -p ${JS_BIN}/ssss
+	@cp -rf ${JS_SRC}/ssss ${JS_BIN}
 	@echo "The JavaScript code has been copied."
 
 build-js:
