@@ -93,6 +93,8 @@ compress-js:
 	@mkdir -p bin/js/ssss/lib/require
 	@cp src/js/ssss/lib/require/* bin/js/ssss/lib/require
 
+	@uglifyjs -o bin/js/ssss/lib/require/require.js bin/js/ssss/lib/require/require.js
+
 build-project:
 	@make copy-images
 	@make build-css
