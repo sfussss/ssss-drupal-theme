@@ -90,10 +90,10 @@ compress-js:
 	@mkdir -p bin/js/coffee_build
 	@cp bin.tmp/* bin/js/coffee_build
 	@rm -rf bin.tmp
-	@mkdir -p bin/js/ssss/lib/require
-	@cp src/js/ssss/lib/require/* bin/js/ssss/lib/require
+	@mkdir -p bin/js/ssss/lib
+	@cp src/js/ssss/lib/require.js bin/js/ssss/lib/require.js
 
-	@uglifyjs -o bin/js/ssss/lib/require/require.js bin/js/ssss/lib/require/require.js
+	@uglifyjs -o bin/js/ssss/lib/require.js bin/js/ssss/lib/require.js
 
 build-project:
 	@make copy-images

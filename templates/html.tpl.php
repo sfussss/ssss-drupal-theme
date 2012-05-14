@@ -14,7 +14,7 @@
 		<?php echo $page; ?>
 		<?php echo $page_bottom; ?>
 
-		<script type="text/javascript" data-main="<?php echo url().path_to_theme().'/bin/js/coffee_build/script.js' ?>" src="<?php echo url().path_to_theme().'/bin/js/ssss/lib/require/require.js'; ?>"></script>
+		<script type="text/javascript" data-main="<?php echo url().path_to_theme().'/bin/js/coffee_build/script.js' ?>" src="<?php echo url().path_to_theme().'/bin/js/ssss/lib/require.js'; ?>"></script>
 		<?php echo $scripts; ?>
 	</body>
 </html>
