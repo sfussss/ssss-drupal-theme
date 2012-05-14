@@ -33,11 +33,8 @@ nbproject
 .svn
 .CVS
 .idea
-node_modules
-.sass-cache
-bin.tmp
-dist
-
-# Build folders to ignore
-bootstrap
-bin
+node_modules/
+.sass-cache/
+bin.tmp/
+dist/
+bin/
