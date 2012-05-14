@@ -4,6 +4,7 @@
     out: "bin.tmp/script.js",
     paths: {
     	lib: 'bin/js/ssss/lib',
-    	bootstrap: 'bin/js/bootstrap/bootstrap'
+    	bootstrap: 'bin/js/bootstrap/bootstrap',
+    	order: 'bin/js/ssss/lib/order'
     }
 })
