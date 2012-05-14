@@ -68,6 +68,17 @@ build-css:
 	@make compile-sass
 	@echo "CSS has been compiled."
 
+compress-css:
+	@# Better safe than sorry. Build the CSS code...
+	@make build-css
+
+	@# .. THEN compress it.
+	@recess ./bin/css/style.css --compress > ./bin/css/style.min.css
+	
+	@rm ./bin/css/style.css
+	@cp ./bin/css/style.min.css ./bin/css/style.css
+	@rm ./bin/css/style.min.css
+
 compress-js:
 	@# Better safe than sorry. Build the JavaScript code...
 	@make build-js
@@ -90,6 +101,7 @@ build-project:
 distribute:
 	@make build-project
 	@make compress-js
+	@make compress-css
 
 	@rm -rf dist
 
