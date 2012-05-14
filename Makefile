@@ -78,7 +78,7 @@ compress-js:
 	@rm -rf bin/js
 	@mkdir -p bin/js/coffee_build
 	@cp bin.tmp/* bin/js/coffee_build
-	@#@rm -rf bin.tmp
+	@rm -rf bin.tmp
 	@mkdir -p bin/js/ssss/lib/require
 	@cp src/js/ssss/lib/require/* bin/js/ssss/lib/require
 
@@ -87,11 +87,24 @@ build-project:
 	@make build-css
 	@make build-js
 
+distribute:
+	@make build-project
+	@make compress-js
+
+	@rm -rf dist
+
+	@mkdir dist
+
+	@cp -r bin dist/bin
+	@cp -r templates dist/templates
+	@cp ssss.info dist/ssss.info
+
 clean:
 	rm -rf ${TO_SASS}
 	rm -rf bin
 	rm -rf .sass-cache
 	rm -rf bin.tmp
+	rm -rf dist
 
 clean-all:
 	make clean
