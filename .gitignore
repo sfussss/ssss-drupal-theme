@@ -36,6 +36,7 @@ nbproject
 node_modules
 .sass-cache
 bin.tmp
+dist
 
 # Build folders to ignore
 bootstrap
