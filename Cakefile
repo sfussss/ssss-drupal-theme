@@ -68,7 +68,7 @@ watchBootstrapJs = ->
 	watchFiles './src/js/bootstrap', spawnCat
 
 watchJs = ->
-	watchFiles './src/js/ssss', spawnCpJs
+	watchFiles './src/js/static', spawnCpJs
 
 watchImg = ->
 	watchFiles './src/img', spawnCpImg
