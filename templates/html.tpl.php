@@ -1,9 +1,3 @@
-<?php
-include_once './includes/bootstrap.inc';
-drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-drupal_flush_all_caches();
-?>
-
 <!doctype html>
 
 <html lang="en">
@@ -20,9 +14,9 @@ drupal_flush_all_caches();
 
 	<body>
 
-			<?php print $page_top; ?>
-			<?php print $page; ?>
-			<?php print $page_bottom; ?>
+		<?php print $page_top; ?>
+		<?php print $page; ?>
+		<?php print $page_bottom; ?>
 
 		<?php print $scripts; ?>
 	</body>

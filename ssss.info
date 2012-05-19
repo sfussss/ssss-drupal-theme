@@ -5,3 +5,10 @@ core = 7.x
 engine = phptemplate
 
 stylesheets[all][] = bin/css/style.css
+
+regions[header] = Header
+regions[highlighted] = Higlighted
+regions[help] = Help
+regions[content] = Content
+regions[sidebar_first] = Sidebar
+regions[footer] = Footer
