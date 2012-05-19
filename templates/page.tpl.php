@@ -94,7 +94,6 @@
     <?php print render($page['header']); ?>
   </div></header>
 
-
   <div class="row">
 
     <div class="span8">

@@ -1,3 +1,10 @@
+<?php
+// http://drupal.org/node/42055
+include_once './includes/bootstrap.inc';
+drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+drupal_flush_all_caches();
+?>
+
 <!doctype html>
 
 <html lang="en">
