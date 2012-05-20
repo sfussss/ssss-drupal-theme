@@ -1,8 +1,8 @@
 requirejs.config
 	paths:
-		lib: '../ssss/lib/'
+		lib: '../static/lib/'
 		bootstrap: '../bootstrap/bootstrap'
-		order: '../ssss/lib/order'
+		order: '../static/lib/order'
 
 require [ 
 	'order!lib/jquery-1.7.2'
