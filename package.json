@@ -1,7 +1,7 @@
 {
     "name": "ssss-theme"
   , "description": "A Drupal theme for the Software Systems Student Society."
-  , "version": "0.1.0"
+  , "version": "0.0.2"
   , "keywords": ["drupal", "ssss"]
   , "author": "Software Systems Student Society"
   , "contributors": [
