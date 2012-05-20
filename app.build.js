@@ -3,8 +3,8 @@
     name: "bin/js/coffee_build/script",
     out: "bin.tmp/script.js",
     paths: {
-    	lib: 'bin/js/ssss/lib',
+    	lib: 'bin/js/static/lib',
     	bootstrap: 'bin/js/bootstrap/bootstrap',
-    	order: 'bin/js/ssss/lib/order'
+    	order: 'bin/js/static/lib/order'
     }
 })
