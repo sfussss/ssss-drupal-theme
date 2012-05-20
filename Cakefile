@@ -2,6 +2,7 @@ child_process = require 'child_process'
 watch         = require 'watch'
 path          = require 'path'
 async         = require 'async'
+fs            = require 'fs'
 
 # TODO: Refactor and rename a bunch of these.
 
@@ -46,6 +47,19 @@ compileCss = (cb) ->
 				cb()
 	]
 
+compileInfoFile = ->
+	jsonInfo = JSON.parse(fs.readFileSync 'ssss.info.json', 'utf8')
+	packageInfo = JSON.parse(fs.readFileSync 'package.json', 'utf8')
+
+	infoFile = "version = #{packageInfo.version}\n"
+
+	for k, v of jsonInfo
+		infoFile += "#{k} = #{v}\n"
+
+	fs.writeFileSync 'ssss.info', infoFile, 'utf8'
+
+	console.log 'The info file has compiled successfully.'
+
 watchFiles = (dir, cb) ->
 	watch.createMonitor dir, (monitor) ->
 		monitor.on 'created', (f, stat) ->
@@ -82,6 +96,15 @@ watchCoffee = ->
 	]
 	spawnProcess 'coffee', coffeeArgs
 
+watchInfo = ->
+	compileInfoFile()
+
+	fs.watchFile 'ssss.info.json', 	(curr, prev) ->
+		compileInfoFile()
+
+	fs.watchFile 'package.json', (curr, prev) ->
+		compileInfoFile()
+
 compileWatchCss = ->
 	spawnCpImg()
 	spawnCat()
@@ -90,9 +113,13 @@ compileWatchCss = ->
 	watchJs()
 	watchImg()
 	watchCoffee()
+	watchInfo()
 	compileCss ->
 		watchLessFiles()
 		watchSassFiles()
 
 task 'watch', 'Watch for changes in files.', ->
 	compileWatchCss()
+
+task 'compile-info-file', 'Compile the .info file.', ->
+	compileInfoFile()

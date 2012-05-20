@@ -1,7 +1,0 @@
-name = Software Systems Student Society
-description = A theme made exclusively for the Software Systems Student Society
-version = 0.0.1
-core = 7.x
-engine = phptemplate
-
-stylesheets[all][] = bin/css/style.css
