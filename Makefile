@@ -17,6 +17,52 @@ JS_BOOTSTRAP_CONCAT=${JS_BIN}/bootstrap
 
 COFFEE_BUILD=${JS_BIN}/coffee_build
 
+configure:
+	@npm install
+
+configure-all:
+	@echo ""
+	@echo "Installing SASS"
+	@echo ""
+
+	@sudo gem install sass
+
+	@echo ""
+	@echo "Installing CoffeeScript"
+	@echo ""
+
+	@sudo npm install -g coffee-script
+
+	@echo ""
+	@echo "Installing jshint."
+	@echo ""
+
+	@sudo npm install -g jshint
+
+	@echo ""
+	@echo "Installing uglify-js."
+	@echo ""
+
+	@sudo npm install -g uglify-js
+
+	@echo ""
+	@echo "Installing recess."
+	@echo ""
+
+	@sudo npm install -g recess
+
+	@echo ""
+	@echo "Installing requirejs."
+	@echo ""
+
+	@sudo npm install -g requirejs
+
+	@echo ""
+	@echo "Installing dependencies."
+	@echo ""
+
+	@make configure
+
 test:
 	jshint js/*.js --config js/.jshintrc
 	jshint js/tests/unit/*.js --config js/.jshintrc
