@@ -1,0 +1,19 @@
+{
+    "name"             : "Software Systems Student Society"
+  , "description"      : "A theme made exclusively for the Software Systems Student Society"
+  , "core"             : "phptemplate"
+
+  , "stylesheet[all][]": "bin/css/style.css"
+
+  , "regions[header]"       : "Header"
+  , "regions[highlighted]"  : "Highlighted"
+  , "regions[help]"         : "Help"
+  , "regions[content]"      : "Content"
+  , "regions[sidebar_first]": "Sidebar"
+  , "regions[footer]"       : "Footer"
+
+  , "regions[home_page_content]" : "Home Page Content"
+  , "regions[hero_unit]"         : "Hero Unit"
+  , "regions[home_center_column]": "Home Center Column"
+  , "regions[home_right_column]" : "Home Right Column"
+}

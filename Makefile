@@ -99,6 +99,7 @@ build-project:
 	@make copy-images
 	@make build-css
 	@make build-js
+	@cake compile-info-file
 
 build-project-compressed:
 	@make build-project
@@ -122,6 +123,7 @@ clean:
 	rm -rf .sass-cache
 	rm -rf bin.tmp
 	rm -rf dist
+	rm -f ssss.info
 
 clean-all:
 	make clean
