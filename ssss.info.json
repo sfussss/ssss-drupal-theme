@@ -4,7 +4,7 @@
   , "core"             : "7.x"
   , "engine"           : "phptemplate"
 
-  , "stylesheet[all][]": "bin/css/style.css"
+  , "stylesheets[all][]": "bin/css/style.css"
 
   , "regions[content]"      : "Content"
   , "regions[header]"       : "Header"
