@@ -32,8 +32,8 @@ build-bootstrap-js:
 	@echo "Bootstrap is now compiled."
 
 copy-js:
-	@mkdir -p ${JS_BIN}/ssss
-	@cp -rf ${JS_SRC}/ssss ${JS_BIN}
+	@mkdir -p ${JS_BIN}/static
+	@cp -rf ${JS_SRC}/static ${JS_BIN}
 	@echo "The JavaScript code has been copied."
 
 build-coffee:
@@ -90,10 +90,10 @@ compress-js:
 	@mkdir -p bin/js/coffee_build
 	@cp bin.tmp/* bin/js/coffee_build
 	@rm -rf bin.tmp
-	@mkdir -p bin/js/ssss/lib/require
-	@cp src/js/ssss/lib/require/* bin/js/ssss/lib/require
+	@mkdir -p bin/js/static/lib
+	@cp src/js/static/lib/require.js bin/js/static/lib/require.js
 
-	@uglifyjs -o bin/js/ssss/lib/require/require.js bin/js/ssss/lib/require/require.js
+	@uglifyjs -o bin/js/static/lib/require.js bin/js/static/lib/require.js
 
 build-project:
 	@make copy-images
