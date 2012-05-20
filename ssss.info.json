@@ -1,10 +1,12 @@
 {
     "name"             : "Software Systems Student Society"
   , "description"      : "A theme made exclusively for the Software Systems Student Society"
-  , "core"             : "phptemplate"
+  , "core"             : "7.x"
+  , "engine"           : "phptemplate"
 
   , "stylesheet[all][]": "bin/css/style.css"
 
+  , "regions[content]"      : "Content"
   , "regions[header]"       : "Header"
   , "regions[highlighted]"  : "Highlighted"
   , "regions[help]"         : "Help"
